@@ -93,10 +93,17 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
+        ################## Plan of attack ##################
+        # - instantiate light on
+        # - base exit case to escape once list is sorted
+        # - develop a swap to check compared item and replace it where it needs to be moved
         """
         Sort the robot's list.
         """
         # Fill this out
+
+        # light_on = self.set_light_on()
+        self.set_light_on()
 
         ##################### Exit case #####################
         while self.light_is_on() is True:
@@ -107,20 +114,26 @@ class SortingRobot:
             while self.can_move_right() is True:
                 self.swap_item()
                 self.move_right()
-
-
-            ##################### essentially performing i, j == j , i #####################
-            ##################### Checks to see if the held item's value is greater than 1 #####################
-            ##################### Replaces that item's position with the currently held item #####################
-            ##################### Moves on to next item #####################
-            if self.compare_item() == 1:
-                self.swap_item()
-                self.move_left()
-                self.swap_item()
-                self.move_right()
-                self.set_light_on()
-           
-            
+                ##################### essentially performing i, j == j , i #####################
+                ##################### Checks to see if the held item's value is greater than 1 #####################
+                ##################### Replaces that item's position with the currently held item #####################
+                ##################### Moves on to next item #####################
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+                    self.set_light_on()
+             
+                ##################### if item held is not larger then go left and swap #####################
+                else:
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+            ##################### When light is on, and robot can move left then move left #####################
+            if self.light_is_on():
+                while self.can_move_left():
+                    self.move_left()
     
 
 if __name__ == "__main__":
