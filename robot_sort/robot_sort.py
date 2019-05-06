@@ -101,7 +101,25 @@ class SortingRobot:
         ##################### Exit case #####################
         while self.light_is_on() is True:
             self.set_light_off()
-            
+
+            ##################### Initial Loop checking to see if robot can in fact move right. if true then it picks up the item and moves right #####################
+        
+            while self.can_move_right() is True:
+                self.swap_item()
+                self.move_right()
+
+
+            ##################### essentially performing i, j == j , i #####################
+            ##################### Checks to see if the held item's value is greater than 1 #####################
+            ##################### Replaces that item's position with the currently held item #####################
+            ##################### Moves on to next item #####################
+            if self.compare_item() == 1:
+                self.swap_item()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                self.set_light_on()
+           
             
     
 
